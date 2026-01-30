@@ -5,12 +5,16 @@
   "author": "Alberto Benatti",
   "main": "./src/main.ts",
   "type": "module",
+  "bin": {
+    "ai-news": "./src/cli.ts"
+  },
   "scripts": {
     "dev": "node --env-file=.env src/main.ts",
     "test": "vitest run",
     "indent:write": "prettier . --write",
     "claude:ln": "ln -s AGENTS.md CLAUDE.md",
     "gemini:ln": "ln -s AGENTS.md GEMINI.md",
+    "cli": "pnpm link --global",
     "devtools": "pnpx @ai-sdk/devtools"
   },
   "keywords": [
@@ -41,6 +45,7 @@
     "@ai-sdk/devtools": "0.0.4",
     "@ai-sdk/openai": "3.0.7",
     "ai": "6.0.25",
+    "dotenv": "^17.2.3",
     "zod": "4.3.5"
   }
 }
