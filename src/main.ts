@@ -8,8 +8,7 @@ const systemPrompt = ` You are a professional research assistant.
     `;
 const commonPrompt = `Provide a concise summary including:
   - The main headlines.
-  - 3 lines max for each article.
-  - The authors if available.
+  - 5 lines max for each article.
   - The link to the article.
   `;
 const tools: ToolSet = {
@@ -29,8 +28,7 @@ const tools: ToolSet = {
 };
 
 async function main(): Promise<string> {
-  //   const my_url = argv[2] || "https://news.ycombinator.com/";
-  const my_url = argv[2];
+  const my_url = argv[2] || "https://news.ycombinator.com/";
   if (!my_url) {
     throw new Error("Please provide a URL as a command-line argument.");
   }
@@ -40,7 +38,7 @@ async function main(): Promise<string> {
     summarizer = streamText({
       model: "gpt-4o-mini",
       tools,
-      prompt: `Summarize the top 3 articles from Hacker News at the given URL.
+      prompt: `Summarize the top 5 articles from Hacker News at the given URL.
 ${commonPrompt}
 
   <>The articles are in the format:
