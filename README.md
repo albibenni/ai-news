@@ -38,7 +38,7 @@ pnpm install
 
 You can configure your API key in two ways:
 
-**Option 1: Local .env file (for development)**
+#### Option 1: Local .env file (for development)
 
 Create a `.env` file in the project root directory:
 
@@ -46,13 +46,16 @@ Create a `.env` file in the project root directory:
 AI_GATEWAY_API_KEY=your_api_key_here
 ```
 
-**Option 2: Global config (for CLI usage)**
+#### Option 2: Global config (for CLI usage)
 
 Create a global config file at `~/.config/ai-news/.env`:
 
 ```bash
 mkdir -p ~/.config/ai-news
 echo "AI_GATEWAY_API_KEY=your_api_key_here" > ~/.config/ai-news/.env
+
+# or
+ln -s .env ~/.config/ai-news/ # to link the env from the project
 ```
 
 The CLI will first check for a `.env` file in your current working directory, and if not found, fall back to the global config location. This allows you to use the `ai-news` command from anywhere without needing a local `.env` file.
