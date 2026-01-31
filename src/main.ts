@@ -2,12 +2,12 @@ import type { ToolSet } from "ai";
 import { stepCountIs, streamText, tool } from "ai";
 import { argv } from "node:process";
 import { z } from "zod/v4";
-import fs from "fs/promises";
 import {
   defaultSummarizer,
   systemPrompt,
   ycombinatorSummarizer,
 } from "./prompt/summerizer.ts";
+import { writeSummaryToFile } from "./write/writer.ts";
 
 const NumberOfArticleSchema = z.coerce
   .number()
@@ -66,22 +66,6 @@ async function summarizeArticles(
   process.stdout.write("\n");
   const text = chunks.join("");
   return text.trim();
-}
-
-/**
- *
- * @param summary The summary text to write to file
- * @param noteLocation The directory where the note should be saved
- * @returns void
- */
-async function writeSummaryToFile(summary: string, noteLocation: string) {
-  const filePath = noteLocation + `/hn_summary_${Date.now()}.md`;
-  try {
-    await fs.writeFile(filePath, summary, "utf-8");
-    console.log(`Summary written to ${filePath}`);
-  } catch (error) {
-    console.error("Error writing summary to file:", error);
-  }
 }
 
 // select x articles from Hacker News and summarize them
